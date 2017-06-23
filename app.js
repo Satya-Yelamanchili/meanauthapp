@@ -9,6 +9,7 @@ const app = express();
 const users = require('./routes/users');
 const port = 4300;
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 mongoose.connection.on('connected',()=>{
     console.log('Connected to database ' + config.database);
