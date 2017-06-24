@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database')
 
 //Register
-router.post('/register', (req,res, next)=>{
+router.post('/register', (req, res, next) => {
     let newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -14,55 +14,56 @@ router.post('/register', (req,res, next)=>{
         password: req.body.password
     });
     console.log(newUser.email);
-    User.adduser(newUser, (err,user)=>{
-        if(err){
-            res.json({success: false, msg:'Failed to create user.'});
+    User.adduser(newUser, (err, user) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to create user.' });
         }
-        else{
-             res.json({success: true, msg:'Successfully created user.'});
+        else {
+            res.json({ success: true, msg: 'Successfully created user.' });
         }
     });
 });
 
 //Authenticate
-router.post('/authenticate', (req,res, next)=>{
+router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
-    User.getUserByUsername(username,  (err, user)=>{
-        if(err) throw err;
-        if(!user){
-            return res.json({success: false, msg:'User not found.'})
+    User.getUserByUsername(username, (err, user) => {
+        if (err) throw err;
+        if (!user) {
+            return res.json({ success: false, msg: 'User not found.' })
         }
-        User.comparePassword(password, user.password, (err, isMatch)=>{
-            if(err) throw err;
-            if(isMatch){
-                const token = jwt.sign(user, config.secret,{
+        User.comparePassword(password, user.password, (err, isMatch) => {
+            if (err) throw err;
+            if (isMatch) {
+                const token = jwt.sign(user, config.secret, {
                     expiresIn: 60488
                 });
-                res.json({ 
-                    success: true, 
+                res.json({
+                    success: true,
                     token: 'JWT ' + token,
-                    user:{
+                    user: {
                         id: user._id,
                         name: user.name,
-                        username:user.username,
-                        email:user.email
+                        username: user.username,
+                        email: user.email
                     }
                 });
-            } else{
-                return res.json({success: false, msg:'Wrong Password.'})
+            } else {
+                return res.json({ success: false, msg: 'Wrong Password.' })
             }
-        });      
+        });
     });
 });
 
 //Profile
-router.get('/profile', passport.authenticate('jwt',{session:false}), (req,res, next)=>{ 
-    res.json({user:req.user});
+router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    console.log(req.user);
+  res.json({user: req.user});
 });
 
 //Validate
-router.get('/validate', (req,res, next)=>{
+router.get('/validate', (req, res, next) => {
     res.send('VALIDATE');
 });
 

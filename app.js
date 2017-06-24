@@ -4,7 +4,7 @@ const bodyparcer = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const config    =require('./config/database');
+const config = require('./config/database');
 const app = express();
 const users = require('./routes/users');
 const port = 4300;
@@ -40,6 +40,5 @@ app.get('/', (req, res) => {
 app.listen(port, ()=> {
     console.log('Server started on port:' + port);
 });
-
 
 //nodemon for running the server and see for changes
