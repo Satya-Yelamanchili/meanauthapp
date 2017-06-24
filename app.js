@@ -22,6 +22,12 @@ app.use(cors());
 app.use(bodyparcer.json());
 app.use('/users', users);
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
 //Set static Folder
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -30,8 +36,10 @@ app.get('/', (req, res) => {
     res.send('Invalid Endpoint.');
 });
 
-
 //Start Server
 app.listen(port, ()=> {
     console.log('Server started on port:' + port);
 });
+
+
+//nodemon for running the server and see for changes
