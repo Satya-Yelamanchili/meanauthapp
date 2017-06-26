@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActorsService } from "../../services/actors.service";
 
 @Component({
   selector: 'app-addactor',
@@ -15,10 +16,22 @@ export class AddactorComponent implements OnInit {
   birthcountry: String;
   bio: String;
   picture: String;
-
-  constructor() { }
+  searchText: string;
+  actors:any;
+  constructor(private actorsService:ActorsService) { }
 
   ngOnInit() {
   }
 
+  onSearchTextChange(){
+    console.log(this.searchText);
+    this.actorsService.getSearchActors(this.searchText).subscribe(actors=>{
+      this.actors = actors;
+      console.log(this.actors);
+    },
+    err=>{
+      console.log(err);
+      return false;
+    });
+  }
 }

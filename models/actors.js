@@ -22,6 +22,11 @@ module.exports.addactor = function (newActor, callback) {
 }
 
 module.exports.getActorByName = function (name, callback) {
-    const query = {givenname:{'$regex' : name, '$options' : 'i'}}; //{ givenname: { $regex: ".*" + name + ".*" } };  
-    Actors.find(query, callback);
+    if(name===undefined){
+        Actors.find(callback);
+    }else{
+        const query = {givenname:{'$regex' : name, '$options' : 'i'}}; //{ givenname: { $regex: ".*" + name + ".*" } };  
+        Actors.find(query, callback);
+    }
+    
 }

@@ -16,6 +16,7 @@ import { AddactorComponent } from './components/addactor/addactor.component'
 
 import { ValidationService } from './services/validation.service'
 import { AuthService } from './services/auth.service';
+import { ActorsService } from "./services/actors.service";
 
 const approutes: Routes = [
   { path:'', component: HomeComponent  },
@@ -44,7 +45,7 @@ const approutes: Routes = [
     RouterModule.forRoot(approutes),
     FlashMessagesModule
   ],
-  providers: [ValidationService, AuthService],
+  providers: [ValidationService, AuthService, ActorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
