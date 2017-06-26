@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const app = express();
 const users = require('./routes/users');
+const actors = require('./routes/actors');
 const port = 4300;
 
 mongoose.Promise = global.Promise;
@@ -21,6 +22,7 @@ app.use(cors());
 //Body Parser Middleware 
 app.use(bodyparcer.json());
 app.use('/users', users);
+app.use('/actors', actors);
 
 //Passport Middleware
 app.use(passport.initialize());
