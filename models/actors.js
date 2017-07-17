@@ -18,6 +18,7 @@ const ActorssSchema = mongoose.Schema({
 const Actors = module.exports = mongoose.model('Actors', ActorssSchema);
 
 module.exports.addactor = function (newActor, callback) {
+    console.log(newActor);
     var promise = newActor.save(callback);
 }
 

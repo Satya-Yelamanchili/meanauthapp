@@ -2,7 +2,49 @@
 
 <ul>
   <li *ngFor="let actor of actors">
-    {{ actor.givenname }}
+    {{ actor.givenname }} 
     {{ actor.dob }}
+    {{ actor.bio }}
   </li>
 </ul>
+
+
+<form (submit)="onAddSubmit()">
+  <div class="form-group">
+    <label class="form-label">Birth Name</label>
+    <input type="text" name="birthname" [(ngModel)]="birthname" placeholder="Enter Actor Birth Name">
+  </div>
+  <div class="form-group">
+    <label class="form-label">Given Name</label>
+    <input type="text" name="givenname" [(ngModel)]="givenname" placeholder="Enter Actor given Name">
+  </div>
+  <div class="form-group">
+    <label class="form-label">DOB</label>
+    <input type="date" name="dob" [(ngModel)]="dob" placeholder="Enter Actor DOB">
+  </div>
+    <div class="form-group">
+    <label class="form-label">Gender</label>
+    <input type="text" name="gender" [(ngModel)]="gender" placeholder="Enter Actor Gender">
+  </div>
+  <div class="form-group">
+    <label class="form-label">City</label>
+    <input type="text" name="birthcity" [(ngModel)]="birthcity" placeholder="Enter Actor Birth City">
+  </div>
+  <div class="form-group">
+    <label class="form-label">State</label>
+    <input type="text" name="birthstate" [(ngModel)]="birthstate" placeholder="Enter Actor Birth State">
+  </div>
+  <div class="form-group">
+    <label class="form-label">Country</label>
+    <input type="text" name="birthcountry" [(ngModel)]="birthcountry" placeholder="Enter Actor Birth Country">
+  </div>
+  <div class="form-group">
+    <label class="form-label">BIO</label>
+    <input type="text" name="bio" [(ngModel)]="bio" placeholder="Enter Actor Bio">
+  </div>
+  <div class="form-group">
+    <label class="form-label">picture</label>
+    <input type="file" name="picture" (change)="onFileChane($event)">
+  </div>
+  <input type="submit" name="submit">
+</form>

@@ -14,4 +14,11 @@ export class ActorsService {
     return this.http.get('http://localhost:4300/actors/' + searchText , { headers: headers })
       .map(res => res.json());
   }
+
+  addActor(actors){
+    let headers = new Headers();
+    headers.append('content-type', 'application/json');
+    return this.http.post('http://localhost:4300/actors/add', actors, { headers: headers })
+      .map(res => res.json());
+  }
 }
